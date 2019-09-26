@@ -1,12 +1,17 @@
 from django.shortcuts import render
-#from django.http import HttpResponse
-from .models import *
+from django.http import HttpResponse
+from .models import MyBlog, MyBlogDetails
+from .serializers import MyBlogSerializer, MyBlogDetailsSerializer
+from rest_framework import viewsets
 
 # Create your views here.
-def BlogView(request):
-	tit = myblog.object.all()
-	return render(request, '', 'Title: ', tit)
+class BlogView(viewsets.ModelViewSet):
+	queryset = MyBlog.objects.all()
+	serializer_class = MyBlogSerializer
 
-"""def index(request):
+class BlogViewDetails(viewsets.ModelViewSet):
+	queryset = MyBlogDetails.objects.all()
+	serializer_class = MyBlogDetailsSerializer
+
+def index(request):
 	return HttpResponse("Hello django!")
-"""
